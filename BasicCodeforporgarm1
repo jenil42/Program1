@@ -1,0 +1,288 @@
+#include <iostream>
+using namespace std;
+
+void addGames();
+void educationGame();
+void numberGusseing();
+void displayGames();
+void readingGame();
+void displayInstructions();
+void askQuestion(const char question[], const char option1[], const char option2[], const char option3[], char answer, int &score);
+int calculateTotalScore(int scoreNakedMoleRats, int scorePeacockMantisShrimps, int scoreOrangutans);
+void displayOrangutansInfo();
+void displayInstructions();
+void displayNakedMoleRatsInfo();
+void displayPeacockMantisShrimpsInfo();
+
+int main()
+{
+    addGames();
+    return 0;
+}
+
+void addGames()
+{
+    char response = 0;
+
+    do
+    {
+
+        int numofGames = 3;
+        int select;
+
+        cout << "1.Education Game " << endl;
+        cout << "2.Number Guess Game" << endl;
+        cout << "3.Reading Game " << endl;
+
+        cout << "which game do you want to add = ";
+        cin >> select;
+
+        while (select < 1 || select > 3)
+        {
+            cout << "\nInvalid Option, Please input valid option ";
+            cout << "\nwhich game do you want to add = ";
+            cin >> select;
+        }
+
+        if (select == 1)
+        {
+            educationGame();
+        }
+        else if (select == 2)
+        {
+            numberGusseing();
+        }
+        else if (select == 3)
+        {
+            readingGame();
+        }
+        cout << "\nWould you like to run the program again? (y or n)";
+        cin >> response;
+    } while (tolower(response) == 'y');
+    if (tolower(response) == 'n')
+    {
+        cout << "Thank you for playing ";
+    }
+}
+
+void educationGame()
+{
+    char response = 0;
+
+    do
+    {
+        int choose;
+        int firstNum, secondNum;
+        cout << "1.Sum " << endl;
+        cout << "2.Substract " << endl;
+        cout << "3.Multiplication " << endl;
+        cout << "What do you want to do : " << endl;
+        cin >> choose;
+
+        if (choose == 1)
+        {
+            int sum;
+            cout << "Enter the first num : ";
+            cin >> firstNum;
+            cout << "Enter the second num : ";
+            cin >> secondNum;
+
+            sum = firstNum + secondNum;
+            cout << "\n The sum of " << firstNum << " and " << secondNum << " is : " << sum;
+        }
+        else if (choose == 2)
+        {
+            int substraction;
+            cout << "Enter the first num : ";
+            cin >> firstNum;
+            cout << "Enter the second num : ";
+            cin >> secondNum;
+
+            substraction = firstNum - secondNum;
+            cout << "\n The substraction of " << firstNum << " and " << secondNum << " is : " << substraction;
+        }
+        else if (choose == 3)
+        {
+            int multiplication;
+            cout << "Enter the first num : ";
+            cin >> firstNum;
+            cout << "Enter the second num : ";
+            cin >> secondNum;
+
+            multiplication = firstNum * secondNum;
+            cout << "\n The multiplication of " << firstNum << " and " << secondNum << " is : " << multiplication;
+        }
+        cout << "\nWould you like to play the education game again? (y or n)";
+        cin >> response;
+    } while (tolower(response) == 'y');
+    if (tolower(response) == 'n')
+        ;
+    {
+        cout << "\nThank you for playing";
+    }
+}
+
+void numberGusseing()
+{
+    int rnum = 0;
+    int trnum = 0;
+    int i = 0;
+    int guess = 0;
+    int low = 7;
+    int high = 77;
+    char response = 0;
+    srand(time(0));
+    do
+    {
+
+        rnum = low + rand() % (high - low + 1);
+
+        cout << "\n\nGuess a number between " << low << " and " << high << ":  ";
+        cin >> guess;
+
+        while (guess < low || guess > high)
+        {
+            cout << "The number is not in the valid range!\n";
+            cout << "Guess a number between " << low << " and " << high << ":  ";
+            cin >> guess;
+        }
+
+        if (guess == rnum)
+            cout << "\n\nYou have gained the super power where skittles can shoot from your fingertips!\n\n";
+        else
+            cout << "\n\nYou get no super powers.  The random number was " << rnum << endl
+                 << endl;
+
+        cout << "\nWould you like to run the program again? (y or n)";
+        cin >> response;
+    } while (tolower(response) == 'y');
+}
+
+void readingGame()
+{
+    int scoreNakedMoleRats = 0;
+    int scorePeacockMantisShrimps = 0;
+    int scoreOrangutans = 0;
+
+    // Display instructions
+    displayInstructions();
+
+    // calling functions for getting informations about animals
+
+    displayNakedMoleRatsInfo();
+
+    // Ask questions about Naked Mole Rats
+
+    askQuestion("1) What is the unique feature of Naked Mole Rats that makes them stand out?", "They have hair all over their bodies.", "They are blind.", "They are the only known eusocial mammal.", 'c', scoreNakedMoleRats);
+    askQuestion("2) How do Naked Mole Rats obtain oxygen underground?", "They breathe through their skin.", "They have special adaptations in their lungs.", "They don't need oxygen.", 'a', scoreNakedMoleRats);
+    askQuestion("3) What is the primary food source for Naked Mole Rats?", "Insects", "Seeds and nuts", "Tubers and roots", 'c', scoreNakedMoleRats);
+    cout << "--------------------------------------------------------------------------------\n";
+    // calling functions for getting informations about animals
+
+    displayPeacockMantisShrimpsInfo();
+
+    // Ask questions about Peacock Mantis Shrimps
+
+    askQuestion("1) What makes the vision of Peacock Mantis Shrimps remarkable?", "They have 360-degree vision.", "They see in black and white.", "They can see colors that humans can't perceive.", 'c', scorePeacockMantisShrimps);
+    askQuestion("2) What is the main weapon of Peacock Mantis Shrimps?", "Sharp claws", "Powerful punches", "Venomous sting", 'b', scorePeacockMantisShrimps);
+    askQuestion("3) How fast can the punch of a Peacock Mantis Shrimp accelerate?", "Faster than a bullet", "Slower than a snail", "Equal to human punch", 'a', scorePeacockMantisShrimps);
+    cout << "--------------------------------------------------------------------------------\n";
+
+    // calling functions for getting informations about animals
+
+    displayOrangutansInfo();
+
+    // Ask questions about Orangutans
+
+    askQuestion("1) Where are Orangutans primarily found?", "Africa", "South America", "Southeast Asia", 'c', scoreOrangutans);
+    askQuestion("2) What is the diet of Orangutans mainly composed of?", "Meat", "Fruits and leaves", "Fish", 'b', scoreOrangutans);
+    askQuestion("3) What is the most distinctive feature of Orangutans?", "Their ability to swing from branches", "Their bright orange fur", "Their large cheek pads called flanges", 'c', scoreOrangutans);
+    cout << "--------------------------------------------------------------------------------\n";
+
+    // Calculate and display total score
+    int totalScore = calculateTotalScore(scoreNakedMoleRats, scorePeacockMantisShrimps, scoreOrangutans);
+    cout << "\nYour total score is: " << totalScore << "/9\n";
+    cout << "--------------------------------------------------------------------------------\n";
+    cout << "Thank You For Playing!";
+}
+void displayGames()
+{
+
+    cout << "Which game do you want play : ";
+    cout << "1. Education Game: ";
+    cout << "2. Number Guessing: ";
+}
+void displayInstructions()
+{
+    cout << "Welcome to the Animal Adventure Educational Program!\n";
+    cout << "Answer the questions and learn interesting facts about animals.\n\n";
+}
+void displayNakedMoleRatsInfo()
+{
+    cout << "Naked Mole Rats:\n";
+    cout << "-----------------------\n";
+    cout << "Naked mole rats are fascinating creatures known for their eusocial behavior,\n";
+    cout << "meaning they live in colonies with a single reproductive female known as the queen.\n";
+    cout << "They have a highly specialized lifestyle and are native to East Africa.\n";
+    cout << "Despite their name, they aren't actually moles and are more closely related to porcupines and guinea pigs.\n\n";
+}
+void displayPeacockMantisShrimpsInfo()
+{
+    cout << "Peacock Mantis Shrimps:\n";
+    cout << "-----------------------\n";
+    cout << "Peacock mantis shrimps, also known as stomatopods, are marine crustaceans found\n";
+    cout << "in the tropical waters of the Indian and Pacific Oceans.\n";
+    cout << "They have incredibly complex eyes capable of seeing polarized light and a vast array of colors.\n";
+    cout << "These creatures are known for their powerful punches that can strike prey with incredible speed and force.\n\n";
+}
+void displayOrangutansInfo()
+{
+    cout << "Orangutans:\n";
+    cout << "-----------------------\n";
+    cout << "Orangutans are large apes native to the rainforests of Indonesia and Malaysia.\n";
+    cout << "They are highly intelligent and are known for their distinctive reddish-brown fur.\n";
+    cout << "Orangutans are primarily arboreal, spending most of their time in trees.\n";
+    cout << "Sadly, orangutans are critically endangered due to habitat loss and poaching.\n\n";
+}
+
+// Function to ask a question, validate the answer, and update score
+void askQuestion(const char question[], const char option1[], const char option2[], const char option3[], char answer, int &score)
+{
+    char userAnswer;
+    // validation
+    while (true)
+    {
+        cout << question << "\n";
+        cout << "a) " << option1 << "\n";
+        cout << "b) " << option2 << "\n";
+        cout << "c) " << option3 << "\n";
+        cout << "Your answer: ";
+        cin >> userAnswer;
+
+        userAnswer = tolower(userAnswer);
+        if (userAnswer == 'a' || userAnswer == 'b' || userAnswer == 'c')
+        {
+            break; // Valid input, exit the loop
+        }
+        else
+        {
+            cout << "The value entered is incorrect. Please enter again.\n";
+        }
+    }
+    // check answers
+    if (userAnswer == answer)
+    {
+        cout << "Correct!\n";
+        score += 1;
+    }
+    else
+    {
+        cout << "Incorrect!\n";
+    }
+}
+
+// Function to calculate total score
+int calculateTotalScore(int scoreNakedMoleRats, int scorePeacockMantisShrimps, int scoreOrangutans)
+{
+    return scoreNakedMoleRats + scorePeacockMantisShrimps + scoreOrangutans;
+}
